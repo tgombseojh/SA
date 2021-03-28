@@ -51,7 +51,8 @@ class SearchApplicationTest {
         member.setPassword("tiger");
         member.setName("seojh");
 
-        //searchResultRepository.deleteAll();
+        // redis cache delete
+        // searchResultRepository.deleteAll();
     }
 
     @Test
@@ -75,7 +76,7 @@ class SearchApplicationTest {
     @Test
     public void test2() throws Exception {
         // todo 키워드 30개를 랜덤으로 100번 정도 검색
-        // todo Async 에러를 테스트
+        // todo Async 에러를 테스트 코드,
         mockMvc.perform(
                 get("/v1/place/{searchword}", "판교떡볶이")
                         .characterEncoding("UTF-8")
