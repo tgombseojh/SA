@@ -1,7 +1,6 @@
 package com.yellowbus.project.place.search.handler;
 
 import com.yellowbus.project.place.search.entity.Member;
-import com.yellowbus.project.place.search.entity.UserInfo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 

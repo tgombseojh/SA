@@ -1,7 +1,6 @@
 package com.yellowbus.project.place.search.service;
 
 import com.yellowbus.project.place.search.entity.Member;
-import com.yellowbus.project.place.search.entity.UserInfo;
 import com.yellowbus.project.place.search.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
