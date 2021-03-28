@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.yellowbus.project.place.search.entity.*;
-import com.yellowbus.project.place.search.exception.ApiException;
-import com.yellowbus.project.place.search.exception.KakaoAPIException;
 import com.yellowbus.project.place.search.repository.HotKeyWordRepository;
 import com.yellowbus.project.place.search.repository.SearchHistoryRepository;
 import com.yellowbus.project.place.search.repository.SearchResultRepository;
