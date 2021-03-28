@@ -1,6 +1,5 @@
 package com.yellowbus.project.place.search.config;
 
-import com.yellowbus.project.place.search.exception.CustomAsyncExceptionHandler;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +21,6 @@ public class AsyncConfig implements AsyncConfigurer {
         taskExecutor.initialize();
 
         return taskExecutor;
-    }
-
-    @Override
-    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return new CustomAsyncExceptionHandler();
     }
 
 }

@@ -110,12 +110,7 @@ public class PlaceService {
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
         Gson gson = new Gson();
-        JsonObject jo;
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            jo = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        } else {
-            throw new ApiException(responseEntity.getBody(), responseEntity.getStatusCode());
-        }
+        JsonObject jo = gson.fromJson(responseEntity.getBody(), JsonObject.class);
 
         JsonArray jsonElements = jo.getAsJsonArray("items");
         List<String> naverPlaceList = new ArrayList<>();
