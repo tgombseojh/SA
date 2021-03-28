@@ -1,9 +1,11 @@
 package com.yellowbus.project.place.search;
 
 import com.yellowbus.project.place.search.entity.Member;
+import com.yellowbus.project.place.search.exception.KakaoAPIException;
 import com.yellowbus.project.place.search.repository.MemberRepository;
 import com.yellowbus.project.place.search.repository.SearchResultRepository;
 import com.yellowbus.project.place.search.service.MemberService;
+import com.yellowbus.project.place.search.service.PlaceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -30,6 +35,9 @@ class SearchApplicationTest {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    PlaceService placeService;
 
     @Autowired
     SearchResultRepository searchResultRepository;
@@ -52,7 +60,7 @@ class SearchApplicationTest {
         member.setName("seojh");
 
         // redis cache delete
-        // searchResultRepository.deleteAll();
+        searchResultRepository.deleteAll();
     }
 
     @Test
@@ -75,13 +83,13 @@ class SearchApplicationTest {
 
     @Test
     public void test2() throws Exception {
-        // todo 키워드 30개를 랜덤으로 100번 정도 검색
-        // todo Async 에러를 테스트 코드,
         mockMvc.perform(
                 get("/v1/place/{searchword}", "판교떡볶이")
                         .characterEncoding("UTF-8")
                         .with( user(member) )
         ).andExpect(status().isOk());
+
+        // Async 에러테스트는 PlaceService 의 API URL 을 살짝 변경해서 실행해보면 간단하게 확인 가능하다.
     }
 
     @Test
