@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yellowbus.project.place.search.entity.Member;
 import com.yellowbus.project.place.search.entity.SearchResult;
+import com.yellowbus.project.place.search.exception.KakaoAPIException;
 import com.yellowbus.project.place.search.service.PlaceService;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -54,6 +55,12 @@ public class PlaceController {
         if (cache.isEmpty()) {
             // Async Job3
             CompletableFuture<List<String>> task1 = placeService.kakaoPlaceAPI(searchWord);
+            try {
+                task1.join();
+            } catch (Exception e) {
+                throw new KakaoAPIException(" from controller ");
+            }
+
             // Async Job4
             CompletableFuture<List<String>> task2 = placeService.naverPlaceAPI(searchWord);
 

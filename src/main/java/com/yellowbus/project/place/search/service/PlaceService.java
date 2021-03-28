@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.yellowbus.project.place.search.entity.*;
 import com.yellowbus.project.place.search.exception.ApiException;
+import com.yellowbus.project.place.search.exception.KakaoAPIException;
 import com.yellowbus.project.place.search.repository.HotKeyWordRepository;
 import com.yellowbus.project.place.search.repository.SearchHistoryRepository;
 import com.yellowbus.project.place.search.repository.SearchResultRepository;
@@ -68,7 +69,7 @@ public class PlaceService {
     }
 
     @Async
-    public CompletableFuture<List<String>> kakaoPlaceAPI(String searchWord) {
+    public CompletableFuture<List<String>> kakaoPlaceAPI(String searchWord) throws Exception {
         String uri = kakaoUri+"?page=1&size=10&sort=accuracy&query="+searchWord;
 
         RestTemplate restTemplate = new RestTemplate();
@@ -82,11 +83,14 @@ public class PlaceService {
         ResponseEntity<String> responseEntity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
 
         Gson gson = new Gson();
-        JsonObject jo;
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            jo = gson.fromJson(responseEntity.getBody(), JsonObject.class);
+
+        JsonObject jo = gson.fromJson(responseEntity.getBody(), JsonObject.class);
+
+        int a = 1;
+        if (a==2) {
+
         } else {
-            throw new ApiException(responseEntity.getBody(), responseEntity.getStatusCode());
+            throw new Exception("Something bad happened.");
         }
 
         JsonArray jsonElements = jo.getAsJsonArray("documents");

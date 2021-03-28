@@ -68,9 +68,10 @@ class SearchApplicationTest {
 
     @Test
     public void test2() throws Exception {
-        // todo 키워드 30개를 랜덤으로 100번 정도 검색하도록 해보자
+        // todo 키워드 30개를 랜덤으로 100번 정도 검색
+        // todo Async 에러를 테스트
         mockMvc.perform(
-                get("/v1/place/{searchword}", "김밥")
+                get("/v1/place/{searchword}", "판교치즈")
                         .characterEncoding("UTF-8")
                         .with( user(member) )
         ).andExpect(status().isOk());

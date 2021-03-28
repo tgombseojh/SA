@@ -31,14 +31,20 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<ExceptionInfo> apiException(ApiException e) { // 오픈 API 에러 감지에 사용
+    public ResponseEntity<ExceptionInfo> apiException(ApiException e) { // 오픈 API 에러 감지 // todo 삭제
         ExceptionInfo message = new ExceptionInfo("SE04", "Open api server error (오픈 api 서버 오류)");
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(SignupException.class)
-    public ResponseEntity<ExceptionInfo> apiException(SignupException e) { // 오픈 API 에러 감지에 사용
+    public ResponseEntity<ExceptionInfo> signUpException(SignupException e) { // MemberController signup 에러 감지
         ExceptionInfo message = new ExceptionInfo("SE05", "User exist (다른 아이디를 사용해주세요)");
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(KakaoAPIException.class)
+    public ResponseEntity<ExceptionInfo> kakaoException(KakaoAPIException e) { // 오픈 API 에러 감지
+        ExceptionInfo message = new ExceptionInfo("SE04", "Kakao Open API 에러");
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

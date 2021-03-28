@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c252067-5305-4b35-a1b3-7e5edff8576c" name="Default Changelist" comment="del UserInfo">
+    <list default="true" id="3c252067-5305-4b35-a1b3-7e5edff8576c" name="Default Changelist" comment="test signup duplicate id">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/config/RedisCacheConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/controller/PlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/controller/PlaceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/service/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yellowbus/project/place/search/service/PlaceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/yellowbus/project/place/search/SearchApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/yellowbus/project/place/search/SearchApplicationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1616739186885</updated>
       <workItem from="1616739189499" duration="29536000" />
-      <workItem from="1616917576171" duration="1984000" />
+      <workItem from="1616917576171" duration="5610000" />
     </task>
     <task id="LOCAL-00001" summary="mod Authentication">
       <created>1616820897693</created>
@@ -198,7 +201,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616918954111</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test signup duplicate id">
+      <created>1616919736473</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616919736473</updated>
+    </task>
+    <task id="LOCAL-00007" summary="test signup duplicate id">
+      <created>1616919765961</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1616919765961</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +240,7 @@
     <MESSAGE value="add junit5 test" />
     <MESSAGE value="add test case" />
     <MESSAGE value="del UserInfo" />
-    <option name="LAST_COMMIT_MESSAGE" value="del UserInfo" />
+    <MESSAGE value="test signup duplicate id" />
+    <option name="LAST_COMMIT_MESSAGE" value="test signup duplicate id" />
   </component>
 </project>
