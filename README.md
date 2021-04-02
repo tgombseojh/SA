@@ -57,6 +57,8 @@ curl -L -X POST -d "username=tiger@gmail.com&password=tiger" -c cookies.txt http
 ```curl
 <!-- 판교김밥 -->
 curl -X GET -b cookies.txt http://localhost:8080/v1/place/%ED%8C%90%EA%B5%90%EA%B9%80%EB%B0%A5
+<!-- 반복검색 -->
+curl -X GET -b cookies.txt -s http://localhost:8080/v1/place/%ED%8C%90%EA%B5%90%EA%B9%80%EB%B0%A5?[1-200]
 
 <!-- 판교짬뽕 -->
 curl -X GET -b cookies.txt http://localhost:8080/v1/place/%ED%8C%90%EA%B5%90%EC%A7%AC%EB%BD%95
