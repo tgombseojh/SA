@@ -3,11 +3,9 @@ package com.yellowbus.project.place.search.controller;
 import com.google.gson.Gson;
 import com.yellowbus.project.place.search.entity.Member;
 import com.yellowbus.project.place.search.exception.SignupException;
-import com.yellowbus.project.place.search.repository.MemberRepository;
-import com.yellowbus.project.place.search.service.PlaceService;
+import com.yellowbus.project.place.search.service.MemberService;
 import lombok.AllArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,26 +17,25 @@ import java.util.HashMap;
 
 @AllArgsConstructor
 @RestController
+@Slf4j
 public class MemberController {
 
-    PlaceService placeService;
-    MemberRepository memberRepository;
+    MemberService memberService;
     BCryptPasswordEncoder bCryptPasswordEncoder;
     Gson gson;
-
-    private static final Logger logger = LogManager.getLogger(MemberController.class);
 
     @PostMapping("/signup")
     public ResponseEntity<HashMap<String, Object>> signup(@RequestParam HashMap<String, Object> hashMap) {
         Member member = gson.fromJson(gson.toJsonTree(hashMap), Member.class);
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
 
-        logger.debug("member : "+member);
+        log.debug("member : "+member);
 
         try {
-            memberRepository.save(member);
+            member = memberService.signup(member);
+            if (member.getUserId()==null) throw new SignupException("sign up failed");
         } catch (DataIntegrityViolationException e) {
-            throw new SignupException(e.getMessage());
+            throw new SignupException("User exist (다른 아이디를 사용해주세요)");
         }
 
         HashMap<String, Object> map = new HashMap<>();

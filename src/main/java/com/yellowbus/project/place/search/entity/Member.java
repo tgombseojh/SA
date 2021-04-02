@@ -16,10 +16,17 @@ public class Member implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long userId;
+
     @Column(name="email" , unique=true)
+    @NonNull
     String email;
+
+    @NonNull
     String name;
+
+    @NonNull
     String password;
+
     String auth;
 
     @Override

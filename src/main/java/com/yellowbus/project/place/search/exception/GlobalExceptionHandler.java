@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SignupException.class)
     public ResponseEntity<ExceptionInfo> signUpException(SignupException e) { // MemberController signup 에러 감지
-        ExceptionInfo message = new ExceptionInfo("SE06", "User exist (다른 아이디를 사용해주세요)");
+        ExceptionInfo message = new ExceptionInfo("SE06", e.getMessage());
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

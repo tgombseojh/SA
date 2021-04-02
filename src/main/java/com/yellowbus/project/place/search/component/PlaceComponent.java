@@ -3,7 +3,6 @@ package com.yellowbus.project.place.search.component;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.yellowbus.project.place.search.controller.PlaceController;
 import com.yellowbus.project.place.search.entity.HotKeyWord;
 import com.yellowbus.project.place.search.entity.Member;
 import com.yellowbus.project.place.search.entity.SearchHistory;
@@ -175,7 +174,7 @@ public class PlaceComponent {
         logger.debug("");
 
         HashMap<String, String> hashMap;
-        List<HashMap> list = new ArrayList<>();
+        List<HashMap<String, String>> list = new ArrayList<>();
         for(String placeName : finalPlaceList) {
             hashMap = new HashMap<>();
             hashMap.put("title", placeName);
@@ -194,8 +193,7 @@ public class PlaceComponent {
     }
 
     public HttpEntity<String> getHttpEntity(HttpHeaders httpHeaders) {
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-        return  entity;
+        return new HttpEntity<>(httpHeaders);
     }
 
 }
