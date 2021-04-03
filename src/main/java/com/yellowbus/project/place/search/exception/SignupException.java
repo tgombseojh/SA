@@ -9,8 +9,9 @@ public class SignupException extends DataIntegrityViolationException {
 
     String message;
 
-    public SignupException(String msg) {
-        super(msg);
+    public SignupException(String message) {
+        super(message);
+        this.message = message;
     }
 
 }

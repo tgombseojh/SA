@@ -3,13 +3,13 @@ package com.yellowbus.project.place.search.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.AsyncTaskExecutor;
-import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @EnableAsync
 @Configuration
-public class AsyncConfig implements AsyncConfigurer {
+public class AsyncConfig extends AsyncConfigurerSupport {
 
     @Bean(name="threadPoolTakExecutor")
     public AsyncTaskExecutor threadPoolTakExecutor() {

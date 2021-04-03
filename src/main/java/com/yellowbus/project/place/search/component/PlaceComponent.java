@@ -34,29 +34,36 @@ public class PlaceComponent {
     private static final Logger logger = LogManager.getLogger(PlaceComponent.class);
 
     final String kakaoApiKey = "KakaoAK a1ff1dac0d12a6bfe4d672cd00c1894b";
-    final String kakaoUri = "https://dapi.kakao.com/v2/local/search/keyword.json";
+    final String kakaoUri = "https://api.kakao.com/v2/local/search/keyword.json";
+    //final String kakaoUri = "https://dapi.kakao.com/v2/local/search/keyword.json";
     final String naverUri = "https://openapi.naver.com/v1/search/local.json";
     final String naverClientId = "4v8zp9lfz1ti3guCS8XC";
     final String naverClientSecret = "5GSV4Q3Rk8";
 
     @Async("threadPoolTakExecutor")
-    public void saveSearchHistory(String searchWord, Member userInfo) {
+    public CompletableFuture<SearchHistory> saveSearchHistory(String searchWord, Member userInfo) {
+        logger.debug(" ========= PlaceComponent saveSearchHistory ========= ");
+        logger.debug("  "+Thread.currentThread().getThreadGroup().getName());
+        logger.debug("  "+Thread.currentThread().getName());
+
         SearchHistory searchHistory = new SearchHistory();
         searchHistory.setUserId(userInfo.getUserId());
         searchHistory.setUserName(userInfo.getUsername());
         searchHistory.setKeyWord(searchWord);
         searchHistory.setDate(new Date());
 
-        searchHistoryRepository.save(searchHistory);
+        searchHistory = searchHistoryRepository.save(searchHistory);
 
-        logger.debug(" ========= PlaceComponent saveSearchHistory ========= ");
-        logger.debug("  "+Thread.currentThread().getThreadGroup().getName());
-        logger.debug("  "+Thread.currentThread().getName());
+        return CompletableFuture.completedFuture(searchHistory);
     }
 
     @Async("threadPoolTakExecutor")
     @Transactional
-    public void saveHotKeyWord(String searchWord) {
+    public CompletableFuture<HotKeyWord> saveHotKeyWord(String searchWord) {
+        logger.debug(" ========= PlaceComponent saveHotKeyWord ========= ");
+        logger.debug("  "+Thread.currentThread().getThreadGroup().getName());
+        logger.debug("  "+Thread.currentThread().getName());
+
         HotKeyWord hotKeyWord = hotKeyWordRepository.findByKeyWord(searchWord);
         // 존재하는 키워드라면 횟수 증가 후 업뎃
         if (hotKeyWord!=null) {
@@ -68,11 +75,9 @@ public class PlaceComponent {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
             hotKeyWord.setDate(simpleDateFormat.format(new Date()));
         }
-        hotKeyWordRepository.save(hotKeyWord);
+        hotKeyWord = hotKeyWordRepository.save(hotKeyWord);
 
-        logger.debug(" ========= PlaceComponent saveHotKeyWord ========= ");
-        logger.debug("  "+Thread.currentThread().getThreadGroup().getName());
-        logger.debug("  "+Thread.currentThread().getName());
+        return CompletableFuture.completedFuture(hotKeyWord);
     }
 
     public Optional<SearchResult> findToCache(String searchWord) {

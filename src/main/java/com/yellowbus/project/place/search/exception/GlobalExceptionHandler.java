@@ -1,6 +1,7 @@
 package com.yellowbus.project.place.search.exception;
 
 import javassist.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestControllerAdvice
 @EnableWebMvc
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoHandlerFoundException.class)

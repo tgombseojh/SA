@@ -6,6 +6,8 @@ import com.yellowbus.project.place.search.service.PlaceService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @AllArgsConstructor
 @RestController
@@ -26,7 +29,7 @@ public class PlaceController {
     Gson gson;
 
     @GetMapping("/v1/place/{searchWord}")
-    public CompletableFuture<HashMap<String, Object>> v3Place(@PathVariable String searchWord, Authentication authentication) {
+    public CompletableFuture<ResponseEntity<HashMap<String, Object>>> v3Place(@PathVariable String searchWord, Authentication authentication) {
         Member userInfo = (Member)authentication.getPrincipal();
         log.debug(" ========= PlaceController v3Place ========= ");
         log.debug("  "+Thread.currentThread().getThreadGroup().getName());
@@ -35,11 +38,13 @@ public class PlaceController {
 
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return placeService.v3Place(searchWord, userInfo);
-            } catch (Exception e) {
+                return new ResponseEntity<>(placeService.v3Place(searchWord, userInfo), HttpStatus.OK);
+            } catch (ExecutionException e) {
                 e.printStackTrace();
-                return null;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            return null;
         }, taskExecutor);
     }
 
@@ -51,27 +56,18 @@ public class PlaceController {
         log.debug("  "+Thread.currentThread().getName());
         log.debug("  "+userInfo.getUsername());
 
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return placeService.getSearchHistory(userInfo);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }, taskExecutor);
+        return CompletableFuture.supplyAsync(() -> placeService.getSearchHistory(userInfo), taskExecutor);
     }
 
     @GetMapping("/v1/search/hot10keywords")
-    public CompletableFuture<HashMap<String, Object>> hotKeyWord() {
+    public CompletableFuture<HashMap<String, Object>> hotKeyWord(Authentication authentication) {
+        Member userInfo = (Member)authentication.getPrincipal();
+        log.debug(" ========= PlaceController hotKeyWord ========= ");
+        log.debug("  "+Thread.currentThread().getThreadGroup().getName());
+        log.debug("  "+Thread.currentThread().getName());
+        log.debug("  "+userInfo.getUsername());
 
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return placeService.getHotKeyWord();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }, taskExecutor);
+        return CompletableFuture.supplyAsync(() -> placeService.getHotKeyWord(), taskExecutor);
     }
 
 }

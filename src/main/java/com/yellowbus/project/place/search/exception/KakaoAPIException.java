@@ -10,5 +10,6 @@ public class KakaoAPIException extends RuntimeException {
 
     public KakaoAPIException(String message) {
         super(message);
+        this.message = message;
     }
 }

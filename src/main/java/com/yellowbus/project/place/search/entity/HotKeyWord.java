@@ -7,6 +7,9 @@ import lombok.ToString;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Table(name = "HotKeyWord")
 @Entity
@@ -32,4 +35,20 @@ public class HotKeyWord {
     @NonNull
     private String date;
 
+    public HashMap<String, Object> changeFromat(List<HotKeyWord> hotKeyWordList) {
+        List<HashMap> resultList = new ArrayList<>();
+        HashMap<String, Object> hashMap;
+        for(HotKeyWord hotKeyWord : hotKeyWordList) {
+            hashMap = new HashMap<>();
+            hashMap.put("keyword", hotKeyWord.getKeyWord());
+            hashMap.put("search_count", hotKeyWord.getSearchCount());
+
+            resultList.add(hashMap);
+        }
+
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("hot10keywords", resultList);
+
+        return resultMap;
+    }
 }

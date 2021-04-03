@@ -10,5 +10,6 @@ public class NaverAPIException extends RuntimeException {
 
     public NaverAPIException(String message) {
         super(message);
+        this.message = message;
     }
 }
